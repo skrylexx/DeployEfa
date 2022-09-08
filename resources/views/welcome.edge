@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdonisJS - A fully featured web framework for Node.js</title>
+  @entryPointStyles('app')
+  @entryPointScripts('app')
+</head>
+
+<body>
+  <header>
+    <section class="sectionHeader">
+      <a href="/" class="aMain">
+        <img class="img1" src="/EFA.png" alt="Logo EFA">
+      </a>
+      <div class="divPrepa">
+        <div id="animation" class="title">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <h1>Soyez sûr de vos sources !</h1>
+        </div>
+      </div>
+      <div class="divDroite">
+      </div>
+    </section>
+  </header>
+  <main>
+    <section class="section_search">
+      <form action="">
+        <div>
+          <input type="text" type="search" name="q" placeholder="lancer un sujet ..." maxlength="20" autocomplete="off" required/>
+          <button type="submit">	
+            &#128269;</button>
+        </div>
+        <div>
+          <label>Langage souhaité :</label>
+          <select name="lang" id="lang">
+            <option value="fr">Français</option>
+            <option value="en">Anglais</option>
+            <option value="es">Espagnol</option>
+            <option value="al">Allemand</option>
+          </select>
+        </div>
+        <div>
+          <label for="max">Nombre d'articles attendus (1-100) :</label>
+          <input type="number" id="max" name="max" min="1" max="100">
+        </div>
+        <label>Origine du journal :</label>
+          <select name="country" id="country">
+            <option value="null"> </option>
+            <option value="fr">Française</option>
+            <option value="en">Anglaise</option>
+            <option value="es">Espagnole</option>
+            <option value="al">Allemande</option>
+          </select>
+          <label>Trier par :</label>
+          <select name="sortby" id="sortby" required>
+            <option value="revelance">Pertinence</option>
+            <option value="publishedAt">Date de publication</option>
+          </select>
+      </form>
+    </section>
+    @if(datas.length === 0)
+    <p style="text-align: center">Aucun resultat trouvé</p>
+    @end
+    <section class="section_list">
+      @each(data in datas)
+      <div class="article">
+        <div>
+          <img src="{{data.image}}" alt="" width="100" height="100">
+        </div>
+        <div class="content_article">
+          <span class="span">Titre</span>
+          <a href="{{ data.url }}" target="_blank">{{ data.title }}</a>
+          <span class="span">Description</span>
+          <p>{{data.description}}</p>
+          <span> Date de publication: </span>
+          <span class="span"> {{data.publishedAt}}</span>
+        </div>
+      </div>
+      @end
+
+    </section>
+  </main>
+
+  <script defer>
+    addEventListener('load', onload);
+
+    const animation = document.querySelector('#animation')
+    onload = (event) => {
+  animation.classList.add("animation")
+  setTimeout(()=>{
+    animation.classList.remove("animation")
+  },2000)
+};
+  </script>
+</body>
+
+</html>
